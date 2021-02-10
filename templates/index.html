@@ -3,7 +3,7 @@
 
    <body>
 	   <div style="margin:50;border-color: gray;border-width: thin;border-style: solid;border-radius: 10px;padding: 30;">
-		  <form action = "http://localhost:5000/uploader" method = "POST" 
+		  <form action = "{{ url_for('upload_file1') }}" method = "POST" 
 			 enctype = "multipart/form-data">
 			 <input type = "file" name = "file" multiple/>
 			 <input type = "submit"/>
