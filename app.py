@@ -15,25 +15,30 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
 
+    img = Img.query.filter_by(labelled=False).first()
+    if img:
+        imsrc= 'images/' + img.name
+        labels = Labels.query.all()
+        return render_template('labels.html', labels=labels, img=img, imsrc=imsrc)
+    return "No Images Found"
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['POST', 'GET'])
 def upload():
-    pic = request.files['pic']
-    if not pic:
-        return 'No pic uploaded!', 400
+    if request.method == 'POST':
+        pic = request.files['pic']
+        if not pic:
+            return 'No pic uploaded!', 400
+        filename = secure_filename(pic.filename)
+        mimetype = pic.mimetype
+        if not filename or not mimetype:
+            return 'Bad upload!', 400
 
-    filename = secure_filename(pic.filename)
-    mimetype = pic.mimetype
-    if not filename or not mimetype:
-        return 'Bad upload!', 400
-
-    img = Img(img=pic.read(), name=filename, mimetype=mimetype)
-    db.session.add(img)
-    db.session.commit()
-
-    return 'Img Uploaded!', 200
+        img = Img(img=pic.read(), name=filename, mimetype=mimetype)
+        db.session.add(img)
+        db.session.commit()
+        return 'Img Uploaded!', 200
+    return render_template('index.html')
 
 @app.route('/labels', methods=['GET', 'POST'])
 def labels():

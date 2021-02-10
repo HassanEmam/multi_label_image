@@ -1,8 +1,11 @@
 <H1>Labels</H1>
+<div class="container">
 <form action = "http://localhost:5000/update" method = "POST">
-	 <input type="text" id="custId" name="imgId" value="{{img.id}}">
+	<div class="child">
+	 <input type="hidden" id="custId" name="imgId" value="{{img.id}}">
 	 <img src="{{ url_for('send_image', filename=img.name)}}" width="600" height="600" style="object-fit: contain;"/>
-
+	</div>
+	<div class="child">
 	{%for label in labels %}
 		<div class="form-check text-warning" style="color: #000; font-weight: bold;">
 			<input class="form-check-input" type="checkbox" value="{{ label.id }}" name="labels" id="{{ label.id }}">
@@ -10,5 +13,27 @@
 		</div>
 
 	{% endfor %}
-	<input type = "submit" />
+		<div style="margin:50px">
+			<input type = "submit" />
+		</div>
+	</div>
 </form>
+</div>
+
+<style>
+.child {
+  float: left;
+  background-color: '#ddd';
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+}
+#container {
+  background-color: red;
+  overflow: hidden;
+  width: 100%;
+}
+form {
+display: flex;
+}
+</style>
