@@ -1,7 +1,7 @@
 {% include 'navbar.html' %}
 <H1>Labels</H1>
 <div class="container">
-<form action = "http://localhost:5000/update" method = "POST">
+<form action = "{{ url_for(update) }}" method = "POST">
 	<div class="child">
 	 <input type="hidden" id="custId" name="imgId" value="{{img.id}}">
 	 <img src="{{ url_for('send_image', filename=img.name)}}" width="600" height="600" style="object-fit: contain;"/>
