@@ -1,0 +1,14 @@
+<H1>Labels</H1>
+<form action = "http://localhost:5000/update" method = "POST">
+	 <input type="text" id="custId" name="imgId" value="{{img.id}}">
+	 <img src="{{ url_for('send_image', filename=img.name)}}" width="600" height="600" style="object-fit: contain;"/>
+
+	{%for label in labels %}
+		<div class="form-check text-warning" style="color: #000; font-weight: bold;">
+			<input class="form-check-input" type="checkbox" value="{{ label.id }}" name="labels" id="{{ label.id }}">
+			<label class="form-check-label" for="defaultCheck1">{{ label.name }}</label>
+		</div>
+
+	{% endfor %}
+	<input type = "submit" />
+</form>
