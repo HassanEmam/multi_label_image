@@ -2,10 +2,12 @@
 {% include 'navbar.html' %}
 
    <body>
-      <form action = "http://localhost:5000/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" multiple/>
-         <input type = "submit"/>
+	   <div style="margin:50;border-color: gray;border-width: thin;border-style: solid;border-radius: 10px;padding: 30;">
+		  <form action = "http://localhost:5000/uploader" method = "POST" 
+			 enctype = "multipart/form-data">
+			 <input type = "file" name = "file" multiple/>
+			 <input type = "submit"/>
       </form>
+	  </ div>
    </body>
 </html>
