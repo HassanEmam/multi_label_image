@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///img.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db_init(app)
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+APP_ROOT = os.path.dirname(__file__)
 
 
 @app.route('/')
@@ -77,7 +77,7 @@ def upload_file1():
       for file in files:
           filename = secure_filename(file.filename)
           mimetype = file.mimetype
-          file.save('./images/' + filename)
+          file.save(os.path.join(os.path.join(APP_ROOT, 'images'), filename))
           img = Img(name=filename, mimetype=mimetype, labelled= False)
           db.session.add(img)
           db.session.commit()
